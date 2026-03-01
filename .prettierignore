@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+dist/
+build/
+coverage/
+
+# Generated files
+*.log
+*.tgz
+*.tar.gz
+
+# Config files
+package-lock.json
+yarn.lock
+
+# Test files
+coverage/
+
+# Other
+.DS_Store
+.env*
+!.env.example
