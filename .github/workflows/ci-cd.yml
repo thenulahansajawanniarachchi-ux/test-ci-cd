@@ -28,20 +28,31 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
+    - name: Debug - Check installed packages
+      run: |
+        echo "Node version:"
+        node --version
+        echo "NPM version:"
+        npm --version
+        echo "Check if vitest exists:"
+        ls -la node_modules/.bin/ | grep vitest || echo "Vitest not found"
+        echo "Package.json test scripts:"
+        npm run | grep test
+    
     - name: Run linting
       run: npm run lint
     
     - name: Run unit tests
-      run: npm run test:unit
+      run: ./node_modules/.bin/vitest run src/test/unit_tests
     
     - name: Run integration tests
-      run: npm run test:integration
+      run: ./node_modules/.bin/vitest run src/test/integration_tests
     
     - name: Run UI tests
-      run: npm run test:ui
+      run: ./node_modules/.bin/vitest run src/test/ui_tests
     
     - name: Run all tests with coverage
-      run: npm run test:coverage
+      run: ./node_modules/.bin/vitest run --coverage
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
